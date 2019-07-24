@@ -15,6 +15,7 @@ class Player
 	def gets_damage(hit)
 		@life_points -= hit
 		if @life_points <= 0
+			@life_points = 0
 			return "\n * * * le joueur #{@name} a été tué ! * * * "
 		end
 	end
@@ -38,11 +39,11 @@ class HumanPlayer < Player
 	def initialize(name)
 		@life_points = 100
 		@weapon_level = 1
-		super(name)
+		@name = name
 	end
 
 	def show_state
-		return " #{@name} a #{@life_points} points de vie et une arme de niveau #{@weapon_level} \n"
+		return " \n #{@name} a #{@life_points} points de vie et une arme de niveau #{@weapon_level} \n"
 	end
 
 	def compute_damage
@@ -51,11 +52,11 @@ class HumanPlayer < Player
 
 	def search_weapon
 		weapon_level1 = rand(1..6)
-		puts "Tu as une arme de niveau #{@weapon_level}"
 		if (@weapon_level < weapon_level1)
 			@weapon_level = weapon_level1
+			puts " \n Tu as une arme de niveau #{@weapon_level} \n"
 		else
-			return "M@*#$... elle n'est pas mieux que ton arme actuelle..."
+			puts " \n M@*#$... elle n'est pas mieux que ton arme actuelle... \n"
 		end
 	end
 
@@ -63,19 +64,19 @@ class HumanPlayer < Player
 		c = rand(1..6)
 		case c
 		when 1
-			return "Tu n'as rien trouvé..."
+			puts " \n Tu n'as rien trouvé... dommage :-( \n"
 		when 2..5
 			@life_points += 50
 			if @life_points > 100
 				@life_points = 100
 			end
-			puts "Bravo, tu as trouvé un pack de +50 points de vie"
+			puts "\n Bravo, tu as trouvé un pack de +50 points de vie \n"
 		when 6
 			@life_points += 80
 			if @life_points > 100
 				@life_points = 100
 			end
-			puts "Waow, tu as trouvé un pack de +80 points de vie"
+			puts " \n Waow, tu as trouvé un pack de +80 points de vie \n"
 		end
 	end
 
